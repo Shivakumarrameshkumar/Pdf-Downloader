@@ -1,0 +1,955 @@
+from tkinter import *
+from tkinter import ttk
+import sys,os,time
+import webbrowser
+'''Creating An Amazing Application For Kids This Helps To Them To Get
+Their Books In PDF Format In Easy Way'''
+PDF=Tk()
+PDF.title('KidsPDF')
+PDF.geometry('800x600')
+PDF.resizable(0,0)
+PDF.config(background="#3aa1a1")
+class KidsPDF:
+    def __init__(self):
+        self.title=Label(PDF,text="KidsPDF",font=('Pacifico',20),width=39,fg='#17827d').place(x=0,y=0)
+        self.class1=Button(PDF,text="Class 1",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.Class1).place(x=150,y=150)
+        self.class2=Button(PDF,text="Class 2",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.class2_term1).place(x=150,y=250)
+        self.class3=Button(PDF,text="Class 3",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.Class3_Term1).place(x=150,y=350)
+        self.class4=Button(PDF,text="Class 4",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.Class4_Term1).place(x=150,y=450)
+        self.class5=Button(PDF,text="Class 5",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.Class5_Term1).place(x=289,y=150)
+        self.class6=Button(PDF,text="Class 6",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.Class6_Term1).place(x=290,y=250)
+        self.class7=Button(PDF,text="Class 7",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.Class7_Term1).place(x=291,y=350)
+        self.class8=Button(PDF,text="Class 8",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.Class8_Term1).place(x=292,y=450)
+        self.class9=Button(PDF,text="Class 9",font=('bulleto',15),bg='#1f329c',fg='light green',command=self.Class9_NoTerm).place(x=293,y=550)
+        '''Here I am Creating Form In Right Hand Side About 
+        Name,Phone Number,Feed Backs'''
+        self.feedback=Label(PDF,text="Feedback",font=('Karma',46),bg='#3aa1a1').place(x=560,y=80)
+        self.user=Entry(PDF,font=('Impact',20))
+        self.user.place(x=550,y=150)
+        self.user.insert(0, "Username")
+        self.phone=Entry(PDF,font=('Impact',20))
+        self.phone.place(x=550,y=200)
+        self.phone.insert(0,"Phonenumber")#Phonenumber
+        self.gen=StringVar()#Declaration Of StringVar For String Variable
+        self.india=ttk.Combobox(PDF,textvariable=self.gen)
+        self.india.place(x=550,y=255)
+        self.india['values']=['Male','Female','Transgender']#Created This Thing To Store Gender Variations
+        self.india.current(0)
+        self.name=Entry(PDF,font=('Impact',10))
+        self.name.place(x=550,y=300,height=80)
+        self.submit=Button(PDF,text="Submit",font=('impact',20),command=self.Userinformation,borderwidth=3,bg='#d1d169',fg='blue',width=10).place(x=559,y=400)
+    def Userinformation(self):
+        self.useridget=self.user.get()
+        self.userphone=self.phone.get()
+        self.genderdis=self.india.get()
+        self.form=self.name.get()
+        try:
+
+            with open("User Data.txt","a")as user:
+                user.write(self.useridget)
+                user.write("\n")
+                user.write(self.userphone)
+                user.write("\n")
+                user.write(self.genderdis)
+                user.write("\n")
+                user.write(self.form)
+                user.write("\n")
+                user.write("\n")
+                '''Here It Stores The Information Of Our Customers In .Txt File
+                Step1:Datas About The Username
+                Step2:Datas About Phonenumber
+                Step3:Feedback
+                '''
+        finally:
+            user.close()
+    def Class1(self):
+        self.Class1_Object=Toplevel()
+        self.Class1_Object.title('KidsPDF')
+        self.Class1_Object.geometry('1000x600')
+        self.Class1_Object.resizable(0,0)
+        self.Class1_Object.config(background="#3aa1a1")
+        self.titles=Label(self.Class1_Object,text="CLASS1",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.book=Label(self.Class1_Object,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.book_english=Label(self.Class1_Object,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.book_tamil=Label(self.Class1_Object,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.book_maths=Label(self.Class1_Object,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.book_science=Label(self.Class1_Object,text='EVS',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+
+        self.book_download=Label(self.Class1_Object,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.book_downloads=Button(self.Class1_Object,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamillinks).place(x=620,y=150)
+        self.book_downloads1=Button(self.Class1_Object,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.englishlinks).place(x=620,y=210)
+        self.book_downloads2=Button(self.Class1_Object,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathslinks).place(x=620,y=270)
+        self.book_downloads3=Button(self.Class1_Object,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.book_sciences).place(x=620,y=330)
+        self.next_button_term2_class1=Button(self.Class1_Object,text=('Term 2'),font=('Subtle Curves',13),bg='orange',width=20,command=self.term2_class).place(x=620,y=430)
+    def term2_class(self):
+        self.Class1_Objects=Toplevel()
+        self.Class1_Objects.title('KidsPDF')
+        self.Class1_Objects.geometry('1000x600')
+        self.Class1_Objects.resizable(0,0)
+        self.Class1_Objects.config(background="#3aa1a1")
+        self.titless=Label(self.Class1_Objects,text="CLASS1",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class1_Objects,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class1_Objects,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class1_Objects,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class1_Objects,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class1_Objects,text='EVS',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+
+        self.books_download=Label(self.Class1_Objects,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class1_Objects,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamillinkss).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class1_Objects,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.englishlinkss).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class1_Objects,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathslinkss).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class1_Objects,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.book_sciencess).place(x=620,y=330)
+        self.nexts_button_term3_class1=Button(self.Class1_Objects,text=('Term 3'),font=('Subtle Curves',13),bg='orange',width=20,command=self.term3_class1).place(x=620,y=430)
+    def term3_class1(self):
+        self.Class1_Obje=Toplevel()
+        self.Class1_Obje.title('KidsPDF')
+        self.Class1_Obje.geometry('1000x600')
+        self.Class1_Obje.resizable(0,0)
+        self.Class1_Obje.config(background="#3aa1a1")
+        self.titless=Label(self.Class1_Obje,text="CLASS1",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class1_Obje,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class1_Obje,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class1_Obje,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class1_Obje,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class1_Obje,text='EVS',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+
+        self.books_download=Label(self.Class1_Obje,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class1_Obje,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamiu).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class1_Obje,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.englinks).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class1_Obje,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.malinks).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class1_Obje,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.bosciences).place(x=620,y=330)
+    def class2_term1(self):
+        self.Class1_O=Toplevel()
+        self.Class1_O.title('KidsPDF')
+        self.Class1_O.geometry('1000x600')
+        self.Class1_O.resizable(0,0)
+        self.Class1_O.config(background="#3aa1a1")
+        self.titless=Label(self.Class1_O,text="CLASS2",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class1_O,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class1_O,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class1_O,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class1_O,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class1_O,text='EVS',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+
+        self.books_download=Label(self.Class1_O,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class1_O,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamil_class2).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class1_O,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.english_class2).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class1_O,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.maths_class2).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class1_O,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.science_class2).place(x=620,y=330)
+        self.nexts_button_term3_class1=Button(self.Class1_O,text=('Term 2'),font=('Subtle Curves',13),bg='orange',width=20,command=self.class2_term2).place(x=620,y=430)
+    def class2_term2(self):
+        self.Class1_s=Toplevel()
+        self.Class1_s.title('KidsPDF')
+        self.Class1_s.geometry('1000x600')
+        self.Class1_s.resizable(0,0)
+        self.Class1_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class1_s,text="CLASS2",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class1_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class1_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class1_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class1_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class1_s,text='EVS',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+
+        self.books_download=Label(self.Class1_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class1_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamils_class2).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class1_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.englishs_class2).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class1_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathss_class2).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class1_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.sciences_class2).place(x=620,y=330)
+        self.nexts_button_term3_class1=Button(self.Class1_s,text=('Term 3'),font=('Subtle Curves',13),bg='orange',width=20,command=class2_term3).place(x=620,y=430)
+    def class2_term3(self):
+        self.Class2_s=Toplevel()
+        self.Class2_s.title('KidsPDF')
+        self.Class2_s.geometry('1000x600')
+        self.Class2_s.resizable(0,0)
+        self.Class2_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class2_s,text="CLASS2",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class2_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class2_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class2_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class2_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class2_s,text='EVS',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+
+        self.books_download=Label(self.Class2_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class2_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tam_class2).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class2_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.eng_class2).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class2_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.math_class2).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class2_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.sci_class2).place(x=620,y=330)
+
+    def Class3_Term1(self):
+        self.Class3_s=Toplevel()
+        self.Class3_s.title('KidsPDF')
+        self.Class3_s.geometry('1000x600')
+        self.Class3_s.resizable(0,0)
+        self.Class3_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class3_s,text="CLASS3",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class3_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class3_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class3_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class3_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class3_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class3_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class3_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class3_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tam_class3).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class3_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.eng_class3).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class3_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.math_class3).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class3_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.sci_class3).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class3_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.social_class3).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class3_s,text=('Term 2'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class3_Term2).place(x=620,y=460)
+    def Class3_Term2(self):
+        self.Class3s_s=Toplevel()
+        self.Class3s_s.title('KidsPDF')
+        self.Class3s_s.geometry('1000x600')
+        self.Class3s_s.resizable(0,0)
+        self.Class3s_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class3s_s,text="CLASS3",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class3s_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class3s_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class3s_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class3s_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class3s_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class3s_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class3s_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class3s_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class3).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class3s_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class3).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class3s_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class3).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class3s_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class3).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class3s_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class3).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class3s_s,text=('Term 3'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class3_Term3).place(x=620,y=460)
+    def Class3_Term3(self):
+        self.Class3ss_s=Toplevel()
+        self.Class3ss_s.title('KidsPDF')
+        self.Class3ss_s.geometry('1000x600')
+        self.Class3ss_s.resizable(0,0)
+        self.Class3ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class3ss_s,text="CLASS3",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class3ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class3ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class3ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class3ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class3ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class3ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class3ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class3ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class33).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class3ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class33).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class3ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class33).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class3ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class33).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class3ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class33).place(x=620,y=390)
+    def Class4_Term1(self):
+        self.Class4ss_s=Toplevel()
+        self.Class4ss_s.title('KidsPDF')
+        self.Class4ss_s.geometry('1000x600')
+        self.Class4ss_s.resizable(0,0)
+        self.Class4ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class4ss_s,text="CLASS4",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class4ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class4ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class4ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class4ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class4ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class4ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class4ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class4ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class4).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class4ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class4).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class4ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class4).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class4ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class4).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class4ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class4).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class4ss_s,text=('Term 2'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class4_Term2).place(x=620,y=460)
+    def Class4_Term2(self):
+        self.Class42ss_s=Toplevel()
+        self.Class42ss_s.title('KidsPDF')
+        self.Class42ss_s.geometry('1000x600')
+        self.Class42ss_s.resizable(0,0)
+        self.Class42ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class42ss_s,text="CLASS4",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class42ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class42ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class42ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class42ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class42ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class42ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class42ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class42ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class44).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class42ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class44).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class42ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class44).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class42ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class44).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class42ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class44).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class42ss_s,text=('Term 3'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class4_Term3).place(x=620,y=460)
+    def Class4_Term3(self):
+        self.Class43ss_s=Toplevel()
+        self.Class43ss_s.title('KidsPDF')
+        self.Class43ss_s.geometry('1000x600')
+        self.Class43ss_s.resizable(0,0)
+        self.Class43ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class43ss_s,text="CLASS4",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class43ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class43ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class43ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class43ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class43ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class43ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class43ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class43ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class444).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class43ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class444).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class43ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class444).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class43ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class444).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class43ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class444).place(x=620,y=390)
+    def Class5_Term1(self):
+        self.Class5ss_s=Toplevel()
+        self.Class5ss_s.title('KidsPDF')
+        self.Class5ss_s.geometry('1000x600')
+        self.Class5ss_s.resizable(0,0)
+        self.Class5ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class5ss_s,text="CLASS5",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class5ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class5ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class5ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class5ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class5ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class5ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class5ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class5ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class5).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class5ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class5).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class5ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class5).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class5ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class5).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class5ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class5).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class5ss_s,text=('Term 2'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class5_Term2).place(x=620,y=460)
+    def Class5_Term2(self):
+        self.Class52ss_s=Toplevel()
+        self.Class52ss_s.title('KidsPDF')
+        self.Class52ss_s.geometry('1000x600')
+        self.Class52ss_s.resizable(0,0)
+        self.Class52ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class52ss_s,text="CLASS5",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class52ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class52ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class52ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class52ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class52ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class52ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class52ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class52ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class55).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class52ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class55).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class52ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class55).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class52ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class55).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class52ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class55).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class52ss_s,text=('Term 3'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class5_Term3).place(x=620,y=460)
+    def Class5_Term3(self):
+        self.Class53ss_s=Toplevel()
+        self.Class53ss_s.title('KidsPDF')
+        self.Class53ss_s.geometry('1000x600')
+        self.Class53ss_s.resizable(0,0)
+        self.Class53ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class53ss_s,text="CLASS5",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class53ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class53ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class53ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class53ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class453ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class53ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class53ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class53ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class555).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class53ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class555).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class53ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class555).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class53ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class555).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class53ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class555).place(x=620,y=390)
+
+    def Class6_Term1(self):
+        self.Class6ss_s=Toplevel()
+        self.Class6ss_s.title('KidsPDF')
+        self.Class6ss_s.geometry('1000x600')
+        self.Class6ss_s.resizable(0,0)
+        self.Class6ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class6ss_s,text="CLASS6",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class6ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class6ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class6ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class6ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class6ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class6ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class6ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class6ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class6).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class6ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class6).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class6ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class6).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class6ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class6).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class6ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class6).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class6sss,text=('Term 2'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class6_Term2).place(x=620,y=460)
+    def Class6_Term2(self):
+        self.Class62ss_s=Toplevel()
+        self.Class62ss_s.title('KidsPDF')
+        self.Class62ss_s.geometry('1000x600')
+        self.Class62ss_s.resizable(0,0)
+        self.Class62ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class62ss_s,text="CLASS6",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class62ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class62ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class62ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class62ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class62ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class62ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class62ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class62ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class66).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class62ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class66).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class62ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class66).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class62ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class66).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class62ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class66).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class62ss_s,text=('Term 3'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class6_Term3).place(x=620,y=460)
+    def Class6_Term3(self):
+        self.Class63ss_s=Toplevel()
+        self.Class63ss_s.title('KidsPDF')
+        self.Class63ss_s.geometry('1000x600')
+        self.Class63ss_s.resizable(0,0)
+        self.Class63ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class63ss_s,text="CLASS6",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class63ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class63ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class63ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class63ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class63ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class63ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class63ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class63ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class666).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class63ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class666).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class63ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class666).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class63ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class666).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class63ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class666).place(x=620,y=390)
+    def Class7_Term1(self):
+        self.Class7ss_s=Toplevel()
+        self.Class7ss_s.title('KidsPDF')
+        self.Class7ss_s.geometry('1000x600')
+        self.Class7ss_s.resizable(0,0)
+        self.Class7ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class7ss_s,text="CLASS7",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class7ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class7ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class7ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class7ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class7ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class7ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class7ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class7ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class7).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class7ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class7).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class7ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class7).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class7ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class7).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class7ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class7).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class7ss_s,text=('Term 2'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class7_Term2).place(x=620,y=460)
+    def Class7_Term2(self):
+        self.Class72ss_s=Toplevel()
+        self.Class72ss_s.title('KidsPDF')
+        self.Class72ss_s.geometry('1000x600')
+        self.Class72ss_s.resizable(0,0)
+        self.Class72ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class72ss_s,text="CLASS7",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class72ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class72ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class72ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class72ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class72ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class72ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class72ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class72ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class77).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class72ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class77).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class72ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class77).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class72ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class77).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class72ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class77).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class72ss_s,text=('Term 3'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class7_Term3).place(x=620,y=460)
+    def Class7_Term3(self):
+        self.Class73ss_s=Toplevel()
+        self.Class73ss_s.title('KidsPDF')
+        self.Class73ss_s.geometry('1000x600')
+        self.Class73ss_s.resizable(0,0)
+        self.Class73ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class73ss_s,text="CLASS7",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class73ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class73ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class73ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class73ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class73ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class73ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class73ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class73ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class777).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class73ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class777).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class73ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class777).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class73ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class777).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class73ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class777).place(x=620,y=390)
+    def Class8_Term1(self):
+        self.Class8ss_s=Toplevel()
+        self.Class8ss_s.title('KidsPDF')
+        self.Class8ss_s.geometry('1000x600')
+        self.Class8ss_s.resizable(0,0)
+        self.Class8ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class8ss_s,text="CLASS8",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class8ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class8ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class8ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class8ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class8ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class8ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class8ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class8ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class8).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class8ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class8).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class8ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class8).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class8ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class8).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class8ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class8).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class8ss_s,text=('Term 2'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class8_Term2).place(x=620,y=460)
+    def Class8_Term2(self):
+        self.Class82ss_s=Toplevel()
+        self.Class82ss_s.title('KidsPDF')
+        self.Class82ss_s.geometry('1000x600')
+        self.Class82ss_s.resizable(0,0)
+        self.Class82ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class82ss_s,text="CLASS8",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class82ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class82ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class82ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class82ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class82ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class82ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class82ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class82ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class88).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class82ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class88).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class82ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class88).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class82ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class8s).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class82ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class88).place(x=620,y=390)
+        self.nexts_button_term3_class1=Button(self.Class82ss_s,text=('Term 3'),font=('Subtle Curves',13),bg='orange',width=20,command=self.Class8_Term3).place(x=620,y=460)
+    def Class8_Term3(self):
+        self.Class83ss_s=Toplevel()
+        self.Class83ss_s.title('KidsPDF')
+        self.Class83ss_s.geometry('1000x600')
+        self.Class83ss_s.resizable(0,0)
+        self.Class83ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class83ss_s,text="CLASS8",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class83ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class83ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class83ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class83ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class83ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class83ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class83ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class83ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class888).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class83ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class888).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class83ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class888).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class83ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class888).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class83ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class888).place(x=620,y=390)
+    def Class9_NoTerm(self):
+        self.Class9ss_s=Toplevel()
+        self.Class9ss_s.title('KidsPDF')
+        self.Class9ss_s.geometry('1000x600')
+        self.Class9ss_s.resizable(0,0)
+        self.Class9ss_s.config(background="#3aa1a1")
+        self.titless=Label(self.Class9ss_s,text="CLASS9",font=('Pacifico',20),width=49,fg='#17827d').place(x=0,y=0)
+        self.books=Label(self.Class9ss_s,text='Books',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=0,y=90)
+        self.books_english=Label(self.Class9ss_s,text='Tamil',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=150)
+        self.books_tamil=Label(self.Class9ss_s,text='English',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=210)
+        self.books_maths=Label(self.Class9ss_s,text='Maths',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=269)
+        self.books_science=Label(self.Class9ss_s,text='Science',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=330)
+        self.books_social=Label(self.Class9ss_s,text='Social',font=('Subtle Curves',20),bg='white',width=29).place(x=0,y=390)
+        self.books_download=Label(self.Class9ss_s,text='Download',font=('Subtle Curves',20),bg='light blue',width=29,fg='green').place(x=520,y=90)
+        self.books_downloads=Button(self.Class9ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.tamk_class9).place(x=620,y=150)
+        self.books_downloads1=Button(self.Class9ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.engk_class9).place(x=620,y=210)
+        self.books_downloads2=Button(self.Class9ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.mathk_class9).place(x=620,y=270)
+        self.books_downloads3=Button(self.Class9ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.scik_class9).place(x=620,y=330)
+        self.books_downloads4=Button(self.Class9ss_s,text=('Download'),font=('Subtle Curves',13),bg='white',width=35,command=self.socialk_class9).place(x=620,y=390)
+        
+
+    def tamillinks(self):#Class One Term 1 Links
+        self.links="https://drive.google.com/open?id=1ZuPJPK3qPD9gpmsLEtwKyNEBxWMV515e"
+        webbrowser.open_new(self.links)
+    def englishlinks(self):
+        self.links1="https://drive.google.com/open?id=1fM1Bql6FYnETN2WhNsA_tr1Yk1ZJ-Gg4"
+        webbrowser.open_new(self.links1)
+    def mathslinks(self):
+        self.links2="https://drive.google.com/open?id=1MZTXvmwk8FNyvjzZ52_xKO0KYDxBPDvM"
+        webbrowser.open_new(self.links2)
+    def book_sciences(self):
+        self.links3="https://drive.google.com/open?id=1MSVjkQy0pwuFxgXHfr-r0d0wQuT0pWbI"
+        webbrowser.open_new(self.links3)
+    #____________________________________Link Ends----------------------------------------------------
+    def tamillinkss(self):
+        self.links="https://drive.google.com/open?id=11TDLUEf2jS28ACK6nLHRKt2cpTORFn1D"
+        webbrowser.open_new(self.links)
+    def englishlinkss(self):
+        self.links1="https://drive.google.com/open?id=1QAXk5mD7n1Ulw3kMiW606OoynNC1qnT6"
+        webbrowser.open_new(self.links1)
+    def mathslinkss(self):
+        self.links2="https://drive.google.com/open?id=1PsquzwQAxhuMpgWX4A3ilv6dLgBWymdk"
+        webbrowser.open_new(self.links2)
+    def book_sciencess(self):
+        self.links3="https://drive.google.com/open?id=1mdg4DbyJ_C_Pgtf0sFDBj6DqIKZ28F_S"
+        webbrowser.open_new(self.links3)
+        #_________________________________LINK ENDS_______________________________________
+    def tamiu(self):
+        self.links="https://drive.google.com/open?id=1MOKkr44jzmMIj5QteyZT5JlLzkMD3q2f"
+        webbrowser.open_new(self.links)
+    def englinks(self):
+        self.links1="https://drive.google.com/open?id=1MLzKAk8-69YmftBqkD9GBoS6HIE7i8Yh"
+        webbrowser.open_new(self.links1)
+    def malinks(self):
+        self.links2="https://drive.google.com/open?id=1hA_dGhDVQjoz3aYS_xopFXB0bJ3f71BM"
+        webbrowser.open_new(self.links2)
+    def bosciences(self):
+        self.links3="https://drive.google.com/open?id=1sI9NjUX2qCDhipK7sBBJVU0u52OqVhx-"
+        webbrowser.open_new(self.links3)
+        #__________________________Linkends_________________________
+    
+    def tamil_class2(self):
+        self.links="https://drive.google.com/open?id=1A1VFLvsESnCAiIPLuZu7U3F1XB6ZEfmx"
+        webbrowser.open_new(self.links)
+    def english_class2(self):
+        self.links1="https://drive.google.com/open?id=1xkqfx9HcDCJE8xlbFR3V6hawH26jUtbP"
+        webbrowser.open_new(self.links1)
+    def maths_class2(self):
+        self.links2="https://drive.google.com/open?id=12MM1qlav5a10BJJzVF1ga9HGOz2PuSiz"
+        webbrowser.open_new(self.links2)
+    def science_class2(self):
+        self.links3="https://drive.google.com/open?id=1SbXNmfefFui5StC8dM7jDSI-zdLsMW5m"
+        webbrowser.open_new(self.links3)    
+    #_______________________LinkEnds______________
+    def tamils_class2(self):
+        self.links="https://drive.google.com/open?id=1KCXr5Xt7LL_2kMufaRsX1XLi7--xmmgo"
+        webbrowser.open_new(self.links)
+    def englishs_class2(self):
+        self.links1="https://drive.google.com/open?id=1xkqfx9HcDCJE8xlbFR3V6hawH26jUtbP"
+        webbrowser.open_new(self.links1)
+    def mathss_class2(self):
+
+        self.links2="https://drive.google.com/open?id=12MM1qlav5a10BJJzVF1ga9HGOz2PuSiz"
+        webbrowser.open_new(self.links2)
+    def sciences_class2(self):
+        self.links3="https://drive.google.com/open?id=1SbXNmfefFui5StC8dM7jDSI-zdLsMW5m"
+        webbrowser.open_new(self.links3)  
+   #_______________________LinksEnds________________________
+    def tam_class2(self):
+        self.links="https://drive.google.com/open?id=1zGyqvYDPu7fz64GDcDMwim6gKrIRuBB9"
+        webbrowser.open_new(self.links)
+    def eng_class2(self):
+        self.links1="https://drive.google.com/open?id=1FSLzoiU_o62WrLQJljAWfTGE_0xSPWCW"
+        webbrowser.open_new(self.links1)
+    def math_class2(self):
+        self.links2="https://drive.google.com/open?id=1hX9v_1y5gt9s3Bnz2Fif1WV6i5gNZu5m"
+        webbrowser.open_new(self.links2)
+    def sci_class2(self):
+        self.links3="https://drive.google.com/open?id=113uaz41mAdHNOoqNSq1EvV9v5Emmyv9v"
+        webbrowser.open_new(self.links3) 
+    #_______________________LinkEnds_____________________
+    def tam_class3(self):
+        self.links="https://drive.google.com/file/d/13k71DR3VI9MnydxjljR8oiW4GZG9lNrD/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def eng_class3(self):
+        self.links1="https://drive.google.com/file/d/18f6di3QlAjPpQ19_x7PwSJSTspC-11gN/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def math_class3(self):
+        self.links2="https://drive.google.com/file/d/13ngWOMCUiuIT2o6LUuOsTY-KOANo5l5T/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def sci_class3(self):
+        self.links3="https://drive.google.com/open?id=113uaz41mAdHNOoqNSq1EvV9v5Emmyv9v"
+        webbrowser.open_new(self.links3) 
+    def social_class3(self):
+        self.links4="https://drive.google.com/file/d/14CVtpUy4kKsx55xv5E9QlRwqWRhQgM1_/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #______________________LinkEnds____________________
+    def tamk_class3(self):
+        self.links="https://drive.google.com/file/d/14Upxc2n4q1CcjJ6gvwcOKLgn6bOuSKHn/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class3(self):
+        self.links1="https://drive.google.com/file/d/15IeNpGvhVumadtoyd-5jIG8Ci_RFcA6Q/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class3(self):
+        self.links2="https://drive.google.com/file/d/14vxQjOkmOeWTHfKX04Et-aTymhquQMM8/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class3(self):
+        self.links3="https://drive.google.com/file/d/14yaPFDq8AQeBmCrDd2KVHLv6fV-juXdX/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class3(self):
+        self.links4="https://drive.google.com/file/d/150HDrUNQGrXTswK-Pf6G6x0qvBDapBnf/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    def tamk_class33(self):
+        self.links="https://drive.google.com/file/d/1ZLD1V7lO5KChEXn3ghyr0cQjBGWbZ-3K/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class33(self):
+        self.links1="https://drive.google.com/file/d/15VSMM0i8MPkPShCwboxZPprZ1Q7VqGHi/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class33(self):
+        self.links2="https://drive.google.com/file/d/15W5lDwSROemS5M3-O3YHWiUkeDwSnLTp/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class33(self):
+        self.links3="https://drive.google.com/file/d/15cqci4e1ZAhcjkZXpCE7qDW-KsK7pYUg/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class33(self):
+        self.links4="https://drive.google.com/file/d/15kR8JSDg-9W-n7029yD8FuPTI14HGwhx/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #______________________LinkEnds____________________Class4th Term1
+    def tamk_class4(self):
+        self.links="https://drive.google.com/file/d/1tnguKQqWV-zNduedq7Tia4g27ld65Q4C/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class4(self):
+        self.links1="https://drive.google.com/file/d/1CUQYsOJ0tVUXy_bqSi3dnTO3Up25CwHd/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class4(self):
+        self.links2="https://drive.google.com/file/d/124IW6lNYw9WnccKJAhUUCAcySs2rgBg1/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class4(self):
+        self.links3="https://drive.google.com/file/d/124Lgx94ilrOpRuCBAmlM58DPFnD28kpS/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class4(self):
+        self.links4="https://drive.google.com/file/d/1aieV1eX94rQVaexkfMmzEgK1XWn4CX7v/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________Class 4 Th Term 2
+    def tamk_class44(self):
+        self.links="https://drive.google.com/file/d/12YwjvHmwIdkJwPD3nPomejJXeSTGQTQ1/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class44(self):
+        self.links1="https://drive.google.com/file/d/12ZviMh8NKJYrw1A6o0QGJOKxHmDKYFoQ/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class44(self):
+        self.links2="https://drive.google.com/file/d/12b_9ObDPGZyNxY2PjI0xiK_POC0t0F9N/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class44(self):
+        self.links3="https://drive.google.com/file/d/12cxRInGdup7UJo0vHZ0_UaQmgScq-YsH/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class44(self):
+        self.links4="https://drive.google.com/file/d/12fC0m8pwpCVFMsBaEoViOsmXLt3meoah/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________Class 4 Th Term 3
+    def tamk_class444(self):
+        self.links="https://drive.google.com/file/d/15sfVQeZhcZTu6t80iKVw49ZcQd9Thpsj/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class444(self):
+        self.links1="https://drive.google.com/file/d/16Hi31--eXl2xbN6KxjAQvSyIXZDEWF7v/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class444(self):
+        self.links2="https://drive.google.com/file/d/16JAAEITb6AIY4LunlYt-GOIAPivhyg2U/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class444(self):
+        self.links3="https://drive.google.com/file/d/16STS37HzJrxYtF7RhCPoydPIzY0yxRGS/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class444(self):
+        self.links4="https://drive.google.com/file/d/16SZ6V0J2MAE3VA1HyMM1MKknyvOALQQW/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class5 term1
+    def tamk_class5(self):
+        self.links="https://drive.google.com/file/d/1-N4dyuHizkut0UvFyKm3vMjNsC-kJzho/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class5(self):
+        self.links1="https://drive.google.com/file/d/1-azd0P8C5M6dW6UqiiwIzKErvj4O7P9J/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class5(self):
+        self.links2="https://drive.google.com/file/d/151xx_09vJ5Js2VGOsXl0D-AbAS7cYumN/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class5(self):
+        self.links3="https://drive.google.com/file/d/1AuvWrSdkEd4cfeBhCT_4epmpfYZwE2FF/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class5(self):
+        self.links4="https://drive.google.com/file/d/1-jyeQ42GRR7m1kDPD6_mTyVWZXtekCzo/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class5 term2
+    def tamk_class55(self):
+        self.links="https://drive.google.com/file/d/10DJf-TsupIhYg47G3BrJTROMtwXTGThv/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class55(self):
+        self.links1="https://drive.google.com/file/d/10SsE8gLakExIyfp87hNwbui6WGWj_ZLq/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class55(self):
+        self.links2="https://drive.google.com/file/d/10emVSz2Z8HQ5FDMxR-laz1CLTkKEkRl2/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class55(self):
+        self.links3="https://drive.google.com/file/d/10fL9QxzP-hx29DKqLJyHZqxrialsaGp-/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class55(self):
+        self.links4="https://drive.google.com/file/d/10g_WRQuaJuWX2JaXwWBD65-jUsb-66lQ/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class5 term3
+    def tamk_class555(self):
+        self.links="https://drive.google.com/file/d/1JhhFIeptHIMBmBLtUs8zS1HgVdZCiXZ6/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class555(self):
+        self.links1="https://drive.google.com/file/d/11S6U0OVbyTwHwmD595nrxvF8C4pN3MfT/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class555(self):
+        self.links2="https://drive.google.com/file/d/11YPEXSBq0ygXtahOGCVV6SbMu4hDwhlF/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class555(self):
+        self.links3="https://drive.google.com/file/d/11bHR1Hf6kROxbLBwCwdGZgawNcHAauea/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class555(self):
+        self.links4="https://drive.google.com/file/d/11gBa5tkyWjlMwP0SvN89aoxXv0xbtWBq/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class 6 term1
+    def tamk_class6(self):
+        self.links="https://drive.google.com/file/d/1Uqh1yz9mOG90HdmCwS9LdV5Y-m2HLJ27/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class6(self):
+        self.links1="https://drive.google.com/file/d/1u-c88oCIe5n3fdHlnqrerxJNRJ3l5vec/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class6(self):
+        self.links2="https://drive.google.com/file/d/1PT8LRA7zyZ2CVmxOgYqw_OuKEvx1hBXD/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class6(self):
+        self.links3="https://drive.google.com/open?id=1AYGdDUST3r1rft3AN__yOxqpUMz84qP5"
+        webbrowser.open_new(self.links3) 
+    def socialk_class6(self):
+        self.links4="https://drive.google.com/open?id=15YtuuXhBiXS9O8pHc55506UsWImh5dkO"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class6 term2
+    def tamk_class66(self):
+        self.links="https://drive.google.com/open?id=10m3doa8gjZ_yymWYF9zhKT8_U6vaGelU"
+        webbrowser.open_new(self.links)
+    def engk_class66(self):
+        self.links1="https://drive.google.com/file/d/14XhFbHZZTCzUTdYCXBodrFHvygKvZM5K/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class66(self):
+        self.links2="https://drive.google.com/open?id=1HC2ij2dsw44tLV_GhrFYv7xhR3d5PKtU"
+        webbrowser.open_new(self.links2)
+    def scik_class66(self):
+        self.links3="https://drive.google.com/file/d/1f27AArb7QaALnAURIxm6cLs0go6hWCDc/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class66(self):
+        self.links4="https://drive.google.com/open?id=1j1JHaQGUxgl717st2dB1g3e5ADL1075n"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class6 term3
+    def tamk_class666(self):
+        self.links="https://drive.google.com/open?id=12dM0v2yMD3IOIE3qtRmM19HICZbtkVet"
+        webbrowser.open_new(self.links)
+    def engk_class666(self):
+        self.links1="https://drive.google.com/open?id=1UEq2PVlVTuPegUUMKcVR9DDtYXOHDFEK"
+        webbrowser.open_new(self.links1)
+    def mathk_class666(self):
+        self.links2="https://drive.google.com/open?id=1fXJy1c3iGxYAhRMebVnyvhjqwJPwRE9i"
+        webbrowser.open_new(self.links2)
+    def scik_class666(self):
+        self.links3="https://drive.google.com/open?id=1gjln8Ca6Foi4E9r32Fj6XmHK1yxsK0V7"
+        webbrowser.open_new(self.links3) 
+    def socialk_class666(self):
+        self.links4="https://drive.google.com/open?id=1GjzdmCSNZGiNEO_PmOAwxEQGPZ8njcBh"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class 7 term1
+    def tamk_class7(self):
+        self.links="https://drive.google.com/open?id=1-lqxyLr3wZY5KrbZmzcOHXk9aAOiLFnq"
+        webbrowser.open_new(self.links)
+    def engk_class7(self):
+        self.links1="https://drive.google.com/open?id=1-lghxs08vJboNAOLssHGOcG9SusRg0Sk"
+        webbrowser.open_new(self.links1)
+    def mathk_class7(self):
+        self.links2="https://drive.google.com/open?id=1-XKxJck-uvCHGFLkvMndIqZ7zD2BQeo0"
+        webbrowser.open_new(self.links2)
+    def scik_class7(self):
+        self.links3="https://drive.google.com/open?id=1-_TOLPPHJVDUKb67V5dqzy8vW422bgGk"
+        webbrowser.open_new(self.links3) 
+    def socialk_class7(self):
+        self.links4="https://drive.google.com/open?id=1-eLxUwBiZJqMak8b-pBLyEicd1FkF1B9"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class 7 term2
+    def tamk_class77(self):
+        self.links="https://drive.google.com/open?id=1J3fTdO_clDpPraZaA8az9siFSGxJWo_z"
+        webbrowser.open_new(self.links)
+    def engk_class77(self):
+        self.links1="https://drive.google.com/open?id=1IlA-Yd1lSXYdy693G2dm8m4vJm_TSjp4"
+        webbrowser.open_new(self.links1)
+    def mathk_class77(self):
+        self.links2="https://drive.google.com/open?id=1kgL3aYJ_yWoatnJ2YOZXpLuD7NoGvved"
+        webbrowser.open_new(self.links2)
+    def scik_class77(self):
+        self.links3="https://drive.google.com/open?id=1IuWYzA06KVUgOwc-N3j-zzR1AY-Kui_k"
+        webbrowser.open_new(self.links3) 
+    def socialk_class77(self):
+        self.links4="https://drive.google.com/open?id=1J0PupWsHj-QqsZa6iki6t8ncscC2ATho"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class 7 term3
+    def tamk_class777(self):
+        self.links="https://drive.google.com/open?id=1zYLLBMAZ0rPa52WH7wza6O5JPwUmubTy"
+        webbrowser.open_new(self.links)
+    def engk_class777(self):
+        self.links1="https://drive.google.com/open?id=1cfpMFNpkGKuxOC1MtISfx1SqG69Jeml2"
+        webbrowser.open_new(self.links1)
+    def mathk_class777(self):
+        self.links2="https://drive.google.com/open?id=1ZMhyYMcoKPWTomS9skYydN2X9DyqXDXq"
+        webbrowser.open_new(self.links2)
+    def scik_class777(self):
+        self.links3="https://drive.google.com/open?id=1JyfFUEnUfiUgeG4JpzfjtI6DK7XQLxeU"
+        webbrowser.open_new(self.links3) 
+    def socialk_class777(self):
+        self.links4="https://drive.google.com/open?id=1IXuOMCPDBPGNjR9if6CjLJWRtjJvUCSt"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class 8 term 1
+    def tamk_class8(self):
+        self.links="https://drive.google.com/file/d/1J0Bt-KPI2VdXZ3jaMm0jdhlwzKX7ckYF/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class8(self):
+        self.links1="https://drive.google.com/file/d/1IxCJaC7hcVen3aXc9-lz3yFwAIJM0DCt/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class8(self):
+        self.links2="https://drive.google.com/file/d/107qhaVbTfL7pm2Sn9nRRBJRDNvu2zMOU/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class8(self):
+        self.links3="https://drive.google.com/file/d/10IA7YBB_j9tHlso8yUEZMV-O-aO_RkQd/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class8(self):
+        self.links4="https://drive.google.com/file/d/10ONOJZziFP2IXQqnMLNINL7Ws0rZtSd9/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class 8 term2
+    def tamk_class88(self):
+        self.links="https://drive.google.com/open?id=1JpFVk5kBQydm1ozcPA5d1qC0xb1fIFaV"
+        webbrowser.open_new(self.links)
+    def engk_class88(self):
+        self.links1="https://drive.google.com/open?id=1JGUGb6RZvgN-il3jV9x6wDePQ5LOOf2T"
+        webbrowser.open_new(self.links1)
+    def mathk_class88(self):
+        self.links2="https://drive.google.com/open?id=13cAG2EAnFdyOVTyT2IBaY1ZRectAzzVn"
+        webbrowser.open_new(self.links2)
+    def scik_class8s(self):
+        self.links3="https://drive.google.com/open?id=1JQsQQjvkI6v5nu-mntsUiCeJtMZ2K7E3"
+        webbrowser.open_new(self.links3) 
+    def socialk_class88(self):
+        self.links4="https://drive.google.com/open?id=1Jd7YNn-OhY9HrRRyiJbWaPqYgE-tQ0JK"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class 8 term3
+    def tamk_class888(self):
+        self.links="https://drive.google.com/open?id=1kyvj10jZu85iF3va2pK50M1BZGqPtn9g"
+        webbrowser.open_new(self.links)
+    def engk_class888(self):
+        self.links1="https://drive.google.com/open?id=1sFmXefhLriAmhtckThJHCc46Acvi4haK"
+        webbrowser.open_new(self.links1)
+    def mathk_class888(self):
+        self.links2="https://drive.google.com/open?id=1lWCeIDPdEjJyhKXWAZRb1Er2Sxek9lcA"
+        webbrowser.open_new(self.links2)
+    def scik_class888(self):
+        self.links3="https://drive.google.com/open?id=1FnKsUrnDNBOa17gwxWuLUyzGHfkk5GBw"
+        webbrowser.open_new(self.links3) 
+    def socialk_class888(self):
+        self.links4="https://drive.google.com/open?id=1BkOwU21HjdycsFYdaT23jQpn_E_wonXk"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    #______________________LinkEnds____________________class9 No Term
+    def tamk_class9(self):
+        self.links="https://drive.google.com/file/d/1J4FbQqDZgFrcMtgYtVk5_SUmG_ZDaWiJ/view?usp=sharing"
+        webbrowser.open_new(self.links)
+    def engk_class9(self):
+        self.links1="https://drive.google.com/file/d/1J2Xhk0HcxbmEOLMrEtLuQqY89BjZPD6Q/view?usp=sharing"
+        webbrowser.open_new(self.links1)
+    def mathk_class9(self):
+        self.links2="https://drive.google.com/file/d/1-_vc8yEDvj49sr0k9cpoDwTLVVwzPEAv/view?usp=sharing"
+        webbrowser.open_new(self.links2)
+    def scik_class9(self):
+        self.links3="https://drive.google.com/file/d/1-jgqnkxZQ11eFo6fY8gifFiDk0wmSgVN/view?usp=sharing"
+        webbrowser.open_new(self.links3) 
+    def socialk_class9(self):
+        self.links4="https://drive.google.com/file/d/1-mTz6XOSpiQXEDvzTkQQL0n9z7ZYp5NR/view?usp=sharing"
+        webbrowser.open_new(self.links4)
+    #_______________________LinkEnds_______________________
+    
+Mac=KidsPDF()
+mainloop()
